@@ -1,20 +1,16 @@
-// import the knex library that will allow us to
-// construct SQL statements
+// connectors/db.js
 const knex = require('knex');
 require('dotenv').config();
 
-const config = {
-  client: 'pg',
+const db = knex({
+  client: process.env.DB_CLIENT,        // "pg"
   connection: {
-    host : 'localhost',
-    port : 5432,
-    user : 'postgres',
-    password : process.env.PASSWORD,
-    database : 'postgres'
+    host: process.env.DB_HOST,          // "localhost"
+    port: process.env.DB_PORT,          // 5432
+    user: process.env.DB_USER,          // "postgres"
+    password: process.env.DB_PASSWORD,  // "8112"
+    database: process.env.DB_DATABASE   // "foodtruckdb" or "postgres"
   }
-};
+});
 
-const db = knex(config);
-// expose the created connection so we can
-// use it in other files to make sql statements
 module.exports = db;

@@ -8,7 +8,8 @@ function handlePrivateFrontEndView(app) {
 
     app.get('/dashboard' , async (req , res) => {
         
-        const user = await getUser(req);
+        const user = req.user;
+
         if(user.role == "truckOwner"){
             return res.render('truckOwnerHomePage' , {name : user.name});
         }

@@ -1,8 +1,394 @@
-.centerImg {
-    display: block;
-    margin: 0 auto;
+/* =========================================================
+   GIU FoodTruck - Enhanced UI Styling (Bootstrap 3/5 safe)
+   Paste entire file.
+   ========================================================= */
+
+/* ✅ KEEP: Your existing helpers */
+.centerImg { display: block; margin: 0 auto; }
+.center { text-align: center; }
+
+/* =========================================================
+   THEME TOKENS
+   ========================================================= */
+:root{
+  --bg: #f4f6fb;
+  --bg2:#eef2ff;
+  --card: #ffffff;
+  --card2:#fbfbff;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --border: rgba(15, 23, 42, 0.10);
+
+  --brand: #f0ad4e;        /* warning/orange theme */
+  --brand2:#ffcc80;
+  --accent:#2563eb;        /* blue */
+  --success:#16a34a;
+  --danger:#dc2626;
+
+  --radius: 14px;
+  --radius-sm: 10px;
+
+  --shadow: 0 10px 30px rgba(2,6,23,0.10);
+  --shadow2: 0 16px 45px rgba(2,6,23,0.14);
+  --ring: 0 0 0 4px rgba(37,99,235,0.18);
+
+  --glass: rgba(255,255,255,0.70);
 }
 
-.center {
-  text-align: center;
+/* =========================================================
+   BASE / LAYOUT
+   ========================================================= */
+* { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body{
+  margin: 0;
+  color: var(--text);
+  font-family: Arial, sans-serif;
+  background:
+    radial-gradient(1000px 600px at 10% -10%, rgba(240,173,78,0.22), transparent 60%),
+    radial-gradient(900px 600px at 95% 0%, rgba(37,99,235,0.18), transparent 55%),
+    linear-gradient(180deg, var(--bg2), var(--bg));
+}
+
+/* nicer default text */
+p, small { color: var(--muted); }
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ✅ unify container spacing */
+.container{ margin-top: 20px; }
+.my-4{ margin-top: 1.5rem !important; margin-bottom: 1.5rem !important; }
+.mb-3{ margin-bottom: 1rem !important; }
+.mt-3{ margin-top: 1rem !important; }
+.mt-4{ margin-top: 1.5rem !important; }
+
+/* Bootstrap 5 utility bridges */
+.me-auto { margin-right:auto !important; }
+.ms-auto { margin-left:auto !important; }
+.me-3 { margin-right:1rem !important; }
+.ms-3 { margin-left:1rem !important; }
+.mx-auto{ margin-left:auto !important; margin-right:auto !important; }
+
+.d-flex { display:flex !important; }
+.justify-content-center { justify-content:center !important; }
+.justify-content-end { justify-content:flex-end !important; }
+.justify-content-between { justify-content:space-between !important; }
+.align-items-center { align-items:center !important; }
+.gap-2 { gap: 10px !important; }
+
+/* grid gap helper */
+.row.g-3 { margin-left: -10px; margin-right: -10px; }
+.g-3 > [class*="col-"] { padding: 10px; }
+
+/* Headings */
+h2, h3, h4 { font-weight: 800; color: var(--text); }
+h4 { letter-spacing: -0.2px; }
+
+/* =========================================================
+   NAVBAR (works for both bootstrap 3 and 5)
+   ========================================================= */
+.navbar{
+  border-radius: 0;
+  border: 0;
+  background: rgba(17,24,39,0.92) !important;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.18);
+}
+
+.navbar .navbar-brand{
+  font-weight: 900;
+  letter-spacing: 0.2px;
+  color: #fff !important;
+}
+
+.navbar .nav > li > a,
+.navbar .navbar-text{
+  color: rgba(255,255,255,0.88) !important;
+  font-weight: 600;
+}
+
+.navbar .nav > li > a:hover{
+  color: #fff !important;
+  background: rgba(255,255,255,0.08) !important;
+  border-radius: 10px;
+}
+
+.navbar .nav > li.active > a,
+.navbar .nav > li.active > a:hover{
+  color: #fff !important;
+  background: rgba(240,173,78,0.20) !important;
+  border-radius: 10px;
+}
+
+/* navbar toggler (bootstrap 3 fallback style) */
+.navbar-toggler{
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 10px;
+  padding: 6px 10px;
+}
+.navbar-toggler-icon{
+  display: inline-block;
+  width: 18px;
+  height: 2px;
+  background: rgba(255,255,255,0.95);
+  position: relative;
+}
+.navbar-toggler-icon::before,
+.navbar-toggler-icon::after{
+  content:"";
+  position:absolute;
+  left:0;
+  width:18px;
+  height:2px;
+  background: rgba(255,255,255,0.95);
+}
+.navbar-toggler-icon::before{ top:-6px; }
+.navbar-toggler-icon::after{ top:6px; }
+
+/* =========================================================
+   CARDS / PANELS / JUMBOTRON
+   ========================================================= */
+.card{
+  background: linear-gradient(180deg, var(--card), var(--card2));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.shadow{ box-shadow: var(--shadow) !important; }
+.shadow-strong{ box-shadow: var(--shadow2) !important; }
+
+.p-4{ padding: 22px !important; }
+.p-3{ padding: 16px !important; }
+
+/* hover lift */
+.card:hover,
+.panel:hover{
+  transform: translateY(-2px);
+  transition: 0.22s ease;
+  box-shadow: var(--shadow2);
+}
+
+/* panels (bootstrap 3) */
+.panel{
+  border-radius: var(--radius);
+  overflow:hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+.panel-heading{
+  font-weight: 800;
+}
+.panel-body{ padding: 16px; }
+
+/* jumbotron polish */
+.jumbotron{
+  border-radius: var(--radius);
+  background: rgba(255,255,255,0.75);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(6px);
+}
+
+/* =========================================================
+   FORMS / INPUTS
+   ========================================================= */
+.form-label{ font-weight: 800; color: var(--text); }
+
+.form-control,
+.form-select{
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(15, 23, 42, 0.18);
+  height: 44px;
+  box-shadow: none;
+}
+
+textarea.form-control{ height: auto; min-height: 110px; }
+
+.form-control:focus,
+.form-select:focus{
+  border-color: rgba(37,99,235,0.55);
+  box-shadow: var(--ring) !important;
+  outline: 0;
+}
+
+::placeholder{ color: rgba(107,114,128,0.75); }
+
+/* =========================================================
+   BUTTONS (upgrade)
+   ========================================================= */
+.btn{
+  border-radius: var(--radius-sm);
+  font-weight: 800;
+  padding: 10px 14px;
+  transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+}
+
+.btn:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 10px 18px rgba(2,6,23,0.12);
+}
+
+.btn:active{
+  transform: translateY(0px);
+  box-shadow: none;
+}
+
+/* theme buttons */
+.btn-warning{
+  background: linear-gradient(180deg, var(--brand), #e89a2e);
+  border-color: #d9891a;
+  color: #111 !important;
+}
+.btn-warning:hover{ opacity: 0.96; }
+
+.btn-success{
+  background: linear-gradient(180deg, #22c55e, #16a34a);
+  border-color: #12823b;
+}
+
+.btn-danger{
+  background: linear-gradient(180deg, #ef4444, #dc2626);
+  border-color: #b91c1c;
+}
+
+/* outline light (bootstrap5) */
+.btn-outline-light{
+  color:#fff !important;
+  border: 1px solid rgba(255,255,255,0.60) !important;
+  background: rgba(255,255,255,0.06) !important;
+}
+.btn-outline-light:hover{
+  background: rgba(255,255,255,0.14) !important;
+}
+
+/* disabled */
+button:disabled, .btn:disabled{
+  opacity: .6;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* =========================================================
+   TABLES (much nicer)
+   ========================================================= */
+.table-responsive{
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  background: #fff;
+}
+
+.table{
+  margin-bottom: 0;
+  background: #fff;
+}
+
+.table thead{
+  background: linear-gradient(180deg, #111827, #0b1220);
+  color: #fff;
+}
+
+.table th{
+  font-weight: 900;
+  letter-spacing: 0.2px;
+  border-bottom: 0 !important;
+}
+
+.table td, .table th{
+  vertical-align: middle !important;
+}
+
+.table tbody tr:hover{
+  background: rgba(37,99,235,0.06);
+}
+
+/* =========================================================
+   ALERTS / MESSAGES / POPUP
+   ========================================================= */
+#msg, #msgInner, #msgInline{
+  margin-top: 12px;
+}
+
+.alert{
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  box-shadow: 0 10px 22px rgba(2,6,23,0.10);
+}
+
+/* popup (top-right toast-like) */
+#popupMsg{
+  z-index: 99999;
+}
+
+#popupMsg .alert{
+  border-radius: var(--radius);
+  box-shadow: var(--shadow2);
+}
+
+/* =========================================================
+   PRODUCT COMPONENTS (used in menu/trucks)
+   ========================================================= */
+
+/* menu / truck cards */
+#menuContainer .card,
+#trucksContainer .card{
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+/* price emphasis */
+.price-tag{
+  font-weight: 900;
+  font-size: 16px;
+  color: var(--text);
+}
+
+/* status badge */
+.badge-status{
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-weight: 900;
+  font-size: 12px;
+}
+.badge-open{ background: rgba(34,197,94,0.15); color: #166534; }
+.badge-closed{ background: rgba(239,68,68,0.15); color: #991b1b; }
+.badge-notavail{ background: rgba(245,158,11,0.15); color: #92400e; }
+
+/* quantity input nicer */
+input[type="number"]{
+  border-radius: var(--radius-sm);
+}
+
+/* =========================================================
+   IMAGES
+   ========================================================= */
+img{
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-sm);
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 768px){
+  .container{ padding-left: 14px; padding-right: 14px; }
+  .navbar .nav > li > a{ border-radius: 10px; }
+  .jumbotron{ padding: 18px; }
+}
+
+@media (max-width: 480px){
+  #popupMsg{
+    left: 10px !important;
+    right: 10px !important;
+    min-width: auto !important;
+  }
 }

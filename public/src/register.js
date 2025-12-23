@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 function showMsg(text, type = "info") {
   const box = $("#msg");
   if (!box.length) return;
@@ -209,3 +210,41 @@ function register() {
     }
   });
 }
+=======
+$(document).ready(function(){
+
+    // Handle Registration Button Click
+    $("#register").click(function() {
+      const name = $('#name').val();
+      const email = $('#email').val();
+      const country = $('#country').val();
+      const birthDate = $('#date').val();
+      const password = $('#password').val();
+
+      if(!name || !email || !country || !birthDate || !password){
+          alert("Enter all fields")
+          return;
+      }
+
+      const data = {
+        name,
+        email,
+        birthDate,
+        password
+      };
+
+      $.ajax({
+        type: "POST",
+        url: '/api/v1/user',
+        data : data,
+        success: function(serverResponse) {
+            alert("successfully registered user")
+            location.href = '/';
+        },
+        error: function(errorResponse) {
+            alert(`Error Register User: ${errorResponse.responseText}`);
+        }
+      });
+    });      
+  });
+>>>>>>> 1d59a5c31ade4e3f7f802454cf83a2c88e88e3b9

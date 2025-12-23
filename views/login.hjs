@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>GIU FoodTruck - Login</title>
+
+  <link rel="stylesheet" href="/styles/bootstrap.min.css">
+  <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+
+  <div id="popupMsg" style="display:none; position:fixed; top:20px; right:20px; z-index:99999; min-width:280px;"></div>
+
+  <div id="msg" style="display:none; padding:10px; margin:10px 0; border-radius:6px;"></div>
+
+  <!-- Navbar (simple) -->
+  <nav class="navbar navbar-dark bg-dark px-3">
+    <a class="navbar-brand" href="/">GIU FoodTruck</a>
+    <a class="btn btn-warning btn-sm" href="/register">Register</a>
+  </nav>
+
+  <div class="container d-flex justify-content-center align-items-center" style="min-height: 85vh;">
+    <div class="card p-4 shadow" style="max-width: 420px; width: 100%;">
+      <div class="text-center mb-3">
+        <h4 class="mb-1">Welcome Back!</h4>
+        <small class="text-muted">Sign in to continue</small>
+      </div>
+
+      <!-- messages -->
+      <div id="msgInner"></div>
+
+      <div class="mb-3">
+        <label class="form-label">Email Address</label>
+        <input id="email" type="email" class="form-control" placeholder="Enter email">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input id="password" type="password" class="form-control" placeholder="Enter password">
+      </div>
+
+      <button id="btnLogin" class="btn btn-warning w-100">Sign In</button>
+
+      <div class="text-center mt-3">
+        <small>Don't have an account? <a href="/register">Register</a></small>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/jquery-2.2.0.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/src/login.js"></script>
+</body>
+</html>

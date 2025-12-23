@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>GIU FoodTruck - Dashboard</title>
+
+  <link rel="stylesheet" href="/styles/bootstrap.min.css">
+  <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+
+<div id="msg" style="display:none; padding:10px; margin:10px 0; border-radius:6px;"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+    <a class="navbar-brand" href="/dashboard">GIU FoodTruck</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item"><a class="nav-link active" href="/dashboard">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="/trucks">Trucks</a></li>
+        <li class="nav-item"><a class="nav-link" href="/cart">Cart</a></li>
+        <li class="nav-item"><a class="nav-link" href="/myOrders">My Orders</a></li>
+      </ul>
+
+      <a class="btn btn-outline-light btn-sm" href="/logout">Logout</a>
+    </div>
+  </nav>
+
+  <div class="container my-4">
+
+    <!-- Welcome Banner -->
+    <div class="card p-4 text-center shadow-sm mb-4" style="background: linear-gradient(90deg,#ff7a18,#af002d 70%); color:white;">
+      <h3 class="mb-1">Welcome back, {{name}}!</h3>
+      <small>Choose an action to start ordering.</small>
+    </div>
+
+    <div class="row g-3">
+
+      <!-- Quick Actions -->
+      <div class="col-md-4">
+        <div class="card p-3 shadow-sm h-100">
+          <h5 class="mb-3">Quick Actions</h5>
+
+          <a class="btn btn-warning w-100 mb-2" href="/trucks">Browse Food Trucks</a>
+          <a class="btn btn-outline-dark w-100 mb-2" href="/cart">View Cart</a>
+          <a class="btn btn-outline-dark w-100" href="/myOrders">My Orders</a>
+        </div>
+      </div>
+
+      <!-- How it works -->
+      <div class="col-md-8">
+        <div class="card p-3 shadow-sm h-100">
+          <h5 class="mb-3">How it works</h5>
+          <ol class="mb-0">
+            <li>Browse available food trucks.</li>
+            <li>Open a truck menu and add items to your cart.</li>
+            <li>Go to cart and confirm quantities.</li>
+            <li>Place your order and track status in “My Orders”.</li>
+          </ol>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="/js/jquery-2.2.0.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+</body>
+</html>

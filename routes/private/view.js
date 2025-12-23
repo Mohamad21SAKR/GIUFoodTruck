@@ -5,6 +5,7 @@ require('dotenv').config();
 const PORT = process.env.PORT || 3001;
 
 function handlePrivateFrontEndView(app) {
+<<<<<<< HEAD
     console.log("✅ handlePrivateFrontEndView LOADED");
 
     // Dashboard (auto route based on role)
@@ -126,10 +127,27 @@ function handlePrivateFrontEndView(app) {
 
     // testing route
     app.get('/testingAxios' , async (req , res) => {
+=======
+
+    app.get('/dashboard' , async (req , res) => {
+        
+        const user = req.user;
+
+        if(user.role == "truckOwner"){
+            return res.render('truckOwnerHomePage' , {name : user.name});
+        }
+        // role of customer
+        return res.render('customerHomepage' , {name : user.name});
+    });
+
+    app.get('/testingAxios' , async (req , res) => {
+
+>>>>>>> 1d59a5c31ade4e3f7f802454cf83a2c88e88e3b9
         try {
             const result = await axios.get(`http://localhost:${PORT}/test`);
             return res.status(200).send(result.data);
         } catch (error) {
+<<<<<<< HEAD
             console.log("error message", error.message);
             return res.status(400).send(error.message);
         }
@@ -137,3 +155,14 @@ function handlePrivateFrontEndView(app) {
 }
 
 module.exports = { handlePrivateFrontEndView };
+=======
+            console.log("error message",error.message);
+            return res.status(400).send(error.message);
+        }
+      
+    });  
+}  
+  
+module.exports = {handlePrivateFrontEndView};
+  
+>>>>>>> 1d59a5c31ade4e3f7f802454cf83a2c88e88e3b9

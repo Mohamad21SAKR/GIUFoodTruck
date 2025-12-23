@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 function showMsg(text, type = "info") {
   const box = document.getElementById("msg");
   if (!box) return;
@@ -151,3 +152,33 @@ function login() {
     }
   });
 }
+=======
+$(document).ready(function(){
+    $("#submit").click(function() {
+      const email = $('#email').val();
+      const password = $('#password').val();
+
+      const data = {
+        email,
+        password,
+      };
+
+      $.ajax({
+        type: "POST",
+        url: '/api/v1/user/login',
+        data,
+        success: function(serverResponse) {
+          if(serverResponse) {
+            alert("login successfully");
+            location.href = '/dashboard';
+          }
+        },
+        error: function(errorResponse) {
+          if(errorResponse) {
+            alert(`User login error: ${errorResponse.responseText}`);
+          }            
+        }
+      });
+    });
+  });
+>>>>>>> 1d59a5c31ade4e3f7f802454cf83a2c88e88e3b9

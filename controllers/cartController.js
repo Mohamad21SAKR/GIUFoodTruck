@@ -1,5 +1,19 @@
+// controllers/cartController.js
 const db = require('../connectors/db');
 const { getUser } = require('../utils/session');
+
+/**
+ * ✅ ADDED:
+ * normalize availability strings (handles typos in DB like "avaliable")
+ */
+function normalizeStatus(v) {
+  return String(v || '').trim().toLowerCase();
+}
+function isAvailableStatus(v) {
+  const s = normalizeStatus(v);
+  // accept both correct + typo (your DB/code uses both)
+  return s === 'available' || s === 'avaliable';
+}
 
 /**
  * Get user's cart with item details
@@ -8,7 +22,6 @@ const { getUser } = require('../utils/session');
 async function getCart(req, res) {
   try {
     const user = req.user;
-
 
     if (!user) {
       return res.status(401).json({ error: 'Unauthorized' });
@@ -59,7 +72,6 @@ async function addToCart(req, res) {
   try {
     const user = req.user;
 
-
     if (!user) {
       return res.status(401).json({ error: 'Unauthorized' });
     }
@@ -90,11 +102,24 @@ async function addToCart(req, res) {
       return res.status(404).json({ error: 'Menu item not found' });
     }
 
-    if (menuItem.status !== 'available') {
+    /**
+     * ✅ UPDATED:
+     * Your code had: menuItem.status !== 'avaliable'
+     * But other files use 'available'.
+     * Now accept BOTH.
+     */
+    if (!isAvailableStatus(menuItem.status)) {
       return res.status(400).json({ error: 'Menu item is not available' });
     }
 
-    if (menuItem.orderStatus !== 'available') {
+    /**
+     * ✅ UPDATED:
+     * truck orderStatus sometimes is 'avaliable' or 'available' or 'open'
+     * We accept open OR available/avaliable as "accepting orders"
+     */
+    const os = normalizeStatus(menuItem.orderStatus);
+    const truckAccepting = (os === 'open' || os === 'available' || os === 'avaliable');
+    if (!truckAccepting) {
       return res.status(400).json({ error: 'This truck is not accepting orders at the moment' });
     }
 
@@ -107,8 +132,8 @@ async function addToCart(req, res) {
       .first();
 
     if (existingCartItems && existingCartItems.truckId !== menuItem.truckId) {
-      return res.status(400).json({ 
-        error: 'Cannot order from multiple trucks. Please clear your cart or complete your current order first.' 
+      return res.status(400).json({
+        error: 'Cannot order from multiple trucks. Please clear your cart or complete your current order first.'
       });
     }
 
@@ -151,13 +176,46 @@ async function addToCart(req, res) {
 }
 
 /**
+ * ✅ ADDED ONLY:
+ * A flexible wrapper for addToCart that supports multiple frontend payload formats.
+ * - Accepts itemId OR menuItemId
+ * - Accepts quantity OR qty
+ * - Defaults quantity to 1 if missing
+ * Then calls the original addToCart (keeps your business rules unchanged).
+ */
+async function addToCartV2(req, res) {
+  try {
+    // map aliases -> the original controller expects: itemId, quantity
+    if (req.body && !req.body.itemId && req.body.menuItemId) {
+      req.body.itemId = req.body.menuItemId;
+    }
+
+    if (req.body && !req.body.quantity && req.body.qty) {
+      req.body.quantity = req.body.qty;
+    }
+
+    // default quantity to 1 if missing (common UI behavior)
+    if (req.body && (req.body.quantity === undefined || req.body.quantity === null || req.body.quantity === "")) {
+      req.body.quantity = 1;
+    }
+
+    // Optional debug (uncomment if needed)
+    // console.log("addToCartV2 body:", req.body);
+
+    return addToCart(req, res);
+  } catch (error) {
+    console.error('Error in addToCartV2:', error.message);
+    return res.status(500).json({ error: 'Failed to add item to cart' });
+  }
+}
+
+/**
  * Update cart item quantity
  * Customer only - can only update own cart
  */
 async function updateCartItem(req, res) {
   try {
     const user = req.user;
-
 
     if (!user) {
       return res.status(401).json({ error: 'Unauthorized' });
@@ -213,7 +271,6 @@ async function removeFromCart(req, res) {
   try {
     const user = req.user;
 
-
     if (!user) {
       return res.status(401).json({ error: 'Unauthorized' });
     }
@@ -252,6 +309,7 @@ async function removeFromCart(req, res) {
 module.exports = {
   getCart,
   addToCart,
+  addToCartV2, // ✅ ADDED
   updateCartItem,
   removeFromCart
 };

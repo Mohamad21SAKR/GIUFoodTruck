@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>GIU FoodTruck - Register</title>
+
+  <link rel="stylesheet" href="/styles/bootstrap.min.css">
+  <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+
+<noscript>
+  <div class="alert alert-danger" style="margin:15px;">
+    JavaScript is required to register. Please enable it in your browser.
+  </div>
+</noscript>
+
+<div id="popupMsg" style="display:none; position:fixed; top:20px; right:20px; z-index:99999; min-width:280px;"></div>
+
+<div id="msg" style="display:none; margin-top:15px;"></div>
+
+  <nav class="navbar navbar-dark bg-dark px-3">
+    <a class="navbar-brand" href="/">GIU FoodTruck</a>
+    <a class="btn btn-warning btn-sm" href="/">Login</a>
+  </nav>
+
+  <div class="container d-flex justify-content-center align-items-center" style="min-height: 85vh;">
+    <div class="card p-4 shadow" style="max-width: 450px; width: 100%;">
+      <div class="text-center mb-3">
+        <h4>Create Account</h4>
+        <small class="text-muted">Join GIU FoodTruck</small>
+      </div>
+
+      <!-- ✅ KEEP but FIX: avoid duplicate id="msg" -->
+      <div id="msgInner"></div>
+
+      <!-- ✅ ADDED: form wrapper for proper submit + Enter key -->
+      <form id="registerForm" autocomplete="off">
+
+        <div class="mb-3">
+          <label class="form-label">Full Name</label>
+          <input id="name" type="text" class="form-control" placeholder="Your name">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input id="email" type="email" class="form-control" placeholder="Email address">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <input id="password" type="password" class="form-control" placeholder="Password">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Birth Date</label>
+          <input id="birthDate" type="date" class="form-control">
+        </div>
+
+        <!-- ✅ UPDATED: prevent default submit refresh -->
+        <button id="btnRegister" type="submit" class="btn btn-warning w-100">Register</button>
+
+      </form>
+
+      <div class="text-center mt-3">
+        <small>Already have an account? <a href="/">Login</a></small>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ✅ ADD scripts (important) -->
+  <script src="/js/jquery-2.2.0.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/src/register.js"></script>
+
+</body>
+</html>

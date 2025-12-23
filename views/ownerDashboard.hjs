@@ -1,0 +1,105 @@
+<%- include('partials/ownerNav'); %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Owner Dashboard</title>
+
+    <!-- Bootstrap & Styles -->
+    <link rel="stylesheet" href="/styles/bootstrap.min.css">
+    <link rel="stylesheet" href="/styles/style.css">
+
+    <!-- jQuery & Bootstrap JS -->
+    <script src="/js/jquery-2.2.0.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div id="msg" style="display:none; padding:10px; margin:10px 0; border-radius:6px;"></div>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/ownerDashboard">GIU FoodTruck</a>
+        </div>
+
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="/ownerDashboard">Home</a></li>
+            <li><a href="/menuItems">Menu Items</a></li>
+            <li><a href="/addMenuItem">Add Item</a></li>
+            <li><a href="/truckOrders">Orders</a></li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="/dashboard">Switch View</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- ===== PAGE CONTENT ===== -->
+<div class="container">
+
+    <!-- Welcome -->
+    <div class="jumbotron text-center">
+        <h2>Welcome, {{ name }}</h2>
+        <p>Manage your food truck, menu items, and orders</p>
+    </div>
+
+    <!-- ✅ ADDED: optional placeholders for JS -->
+    <p id="emptyMsg" class="text-center" style="display:none;">No data found.</p>
+
+    <!-- Stats Section -->
+    <div class="row text-center">
+
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Menu Items</div>
+                <div class="panel-body">
+                    <h3 id="menuCount">0</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="panel panel-warning">
+                <div class="panel-heading">Pending Orders</div>
+                <div class="panel-body">
+                    <h3 id="pendingCount">0</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="panel panel-success">
+                <div class="panel-heading">Completed Orders</div>
+                <div class="panel-body">
+                    <h3 id="completedCount">0</h3>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Availability -->
+    <div class="text-center" style="margin-top:30px;">
+        <h4>Truck Availability</h4>
+        <select id="availability" class="form-control" style="width:200px; margin:auto;">
+            <option value="open">Open</option>
+            <option value="closed">Closed</option>
+        </select>
+        <br>
+        <button id="updateAvailability" class="btn btn-primary">
+            Update Status
+        </button>
+    </div>
+
+</div>
+
+<!-- ===== PAGE SCRIPT ===== -->
+<script src="/src/ownerDashboard.js"></script>
+
+</body>
+</html>

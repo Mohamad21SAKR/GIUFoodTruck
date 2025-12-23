@@ -1,4 +1,4 @@
-# GIU Food-Truck System Backend
+# GIU Food-Truck System (Full Stack)
 
 ## Project Overview
 
@@ -72,6 +72,7 @@ milestoneBackend/
 ├── API_DOCUMENTATION.md         # Complete API documentation
 ├── TESTING_GUIDE.md            # Testing scenarios and examples
 └── README.md                    # This file
+
 ```
 
 ---
@@ -502,7 +503,7 @@ This project is for educational purposes as part of the GIU Software Engineering
 
 ---
 
-**Last Updated:** December 2024  
+**Last Updated:** December 2025  
 **Version:** 1.0.0
 
 ---

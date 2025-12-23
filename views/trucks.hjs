@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>GIU FoodTruck - Trucks</title>
+
+  <link rel="stylesheet" href="/styles/bootstrap.min.css">
+  <link rel="stylesheet" href="/styles/style.css">
+
+  <!-- ✅ ADDED: small styling helpers (optional, no conflict) -->
+  <style>
+    .truck-card-hover:hover { transform: translateY(-2px); transition: 0.2s; }
+  </style>
+</head>
+<body>
+
+<div id="msg" style="display:none; padding:10px; margin:10px 0; border-radius:6px;"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+    <a class="navbar-brand" href="/dashboard">GIU FoodTruck</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item"><a class="nav-link" href="/dashboard">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link active" href="/trucks">Trucks</a></li>
+        <li class="nav-item"><a class="nav-link" href="/cart">Cart</a></li>
+        <li class="nav-item"><a class="nav-link" href="/myOrders">My Orders</a></li>
+      </ul>
+
+      <span class="navbar-text text-white me-3">Hi, {{name}}</span>
+      <a class="btn btn-outline-light btn-sm" href="/logout">Logout</a>
+    </div>
+  </nav>
+
+  <div class="container my-4">
+    <h4 class="mb-3">Available Food Trucks</h4>
+
+    <!-- ✅ FIX: keep it but avoid duplicate id="msg" -->
+    <div id="msgInner"></div>
+
+    <!-- ✅ ADDED: Loading + Empty placeholders (no conflict with your JS) -->
+    <div id="loadingTrucks" class="alert alert-info" style="display:none;">
+      Loading trucks...
+    </div>
+
+    <div id="emptyTrucks" class="alert alert-secondary" style="display:none;">
+      No trucks available right now.
+    </div>
+
+    <div id="trucksContainer" class="row g-3">
+      <!-- JS will render truck cards here -->
+    </div>
+  </div>
+
+  <!-- ✅ Scripts: correct order -->
+  <script src="/js/jquery-2.2.0.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/src/trucks.js"></script>
+
+  <!-- ✅ ADDED: optional quick debug (remove later if you want) -->
+  <script>
+    // Helps you confirm page is loading scripts correctly
+    console.log("✅ trucks.hjs loaded");
+  </script>
+
+  <!-- ✅ KEEP (but prevent double-load): duplicated scripts were here -->
+  <!--
+  <script src="/js/jquery-2.2.0.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  -->
+
+</body>
+</html>

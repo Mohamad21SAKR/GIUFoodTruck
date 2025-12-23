@@ -1,0 +1,8 @@
+<nav style="display:flex; gap:20px; padding:15px; border-bottom:1px solid #ccc;">
+  <a href="/ownerDashboard">Dashboard</a>
+  <a href="/menuItems">Menu Items</a>
+  <a href="/addMenuItem">Add Item</a>
+  <a href="/truckOrders">Orders</a>
+  <a href="/logout">Logout</a>
+</nav>
+<hr/>

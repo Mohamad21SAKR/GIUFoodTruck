@@ -2,18 +2,6 @@
 const db = require('../connectors/db');
 
 /**
- * ✅ ADDED:
- * normalize availability strings (handles typos like "avaliable")
- */
-function normalizeStatus(v) {
-  return String(v || '').trim().toLowerCase();
-}
-function isAvailableStatus(v) {
-  const s = normalizeStatus(v);
-  return s === 'available' || s === 'avaliable';
-}
-
-/**
  * Get menu items for a specific truck
  * Accessible by all authenticated users
  */
@@ -41,10 +29,6 @@ async function getTruckMenu(req, res) {
       query = query.andWhere('category', category);
     }
 
-    // ✅ ADDED (safe): If you want customer view to show only available items,
-    // you can enable this filter. (Keeping it OFF by default to not break your behavior.)
-    // query = query.andWhere('status', 'available');
-
     // 4) Order nicely
     const menuItems = await query
       .orderBy('category', 'asc')
@@ -56,6 +40,7 @@ async function getTruckMenu(req, res) {
     return res.status(500).json({ error: 'Failed to fetch menu' });
   }
 }
+
 
 /**
  * Get menu items for truck owner's own truck
@@ -142,24 +127,13 @@ async function addMenuItem(req, res) {
       });
     }
 
-    /**
-     * ✅ UPDATED:
-     * You had default: 'available'
-     * Your cart code originally checked 'avaliable' (typo).
-     * Now we normalize so any of them works.
-     */
-    const normalizedIncomingStatus = status ? normalizeStatus(status) : null;
-    const finalStatus = normalizedIncomingStatus
-      ? (isAvailableStatus(normalizedIncomingStatus) ? 'available' : normalizedIncomingStatus)
-      : 'available';
-
     const newMenuItem = {
       truckId: truck.truckId,
       name,
       description: description || null,
       price: parseFloat(price),
       category,
-      status: finalStatus,
+      status: status || 'available',
     };
 
     const [menuItem] = await db('MenuItems')
@@ -230,15 +204,7 @@ async function updateMenuItem(req, res) {
     if (description !== undefined) updateData.description = description;
     if (price !== undefined) updateData.price = parseFloat(price);
     if (category !== undefined) updateData.category = category;
-
-    /**
-     * ✅ UPDATED:
-     * Normalize status if provided (avaliable -> available)
-     */
-    if (status !== undefined) {
-      const s = normalizeStatus(status);
-      updateData.status = isAvailableStatus(s) ? 'available' : s;
-    }
+    if (status !== undefined) updateData.status = status;
 
     if (Object.keys(updateData).length === 0) {
       return res.status(400).json({ error: 'No fields to update' });

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>GIU FoodTruck - Truck Menu</title>
+
+  <link rel="stylesheet" href="/styles/bootstrap.min.css">
+  <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+
+<div id="msg" style="display:none; margin-top:15px;"></div>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+    <a class="navbar-brand" href="/dashboard">GIU FoodTruck</a>
+
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item"><a class="nav-link" href="/dashboard">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="/trucks">Trucks</a></li>
+        <li class="nav-item"><a class="nav-link" href="/cart">Cart</a></li>
+        <li class="nav-item"><a class="nav-link" href="/myOrders">My Orders</a></li>
+      </ul>
+
+      <span class="navbar-text text-white me-3">Hi, {{name}}</span>
+      <a class="btn btn-outline-light btn-sm" href="/logout">Logout</a>
+    </div>
+  </nav>
+
+  <div class="container my-4">
+    <h4>Truck Menu</h4>
+    <p class="text-muted mb-3">Truck ID: {{truckId}}</p>
+
+    <div class="d-flex justify-content-end mb-3" style="max-width: 260px;">
+      <select id="categoryFilter" class="form-select">
+        <option value="all">All Categories</option>
+      </select>
+    </div>
+
+    <!-- ✅ FIX: keep but avoid duplicate id="msg" -->
+    <div id="msgInner"></div>
+
+    <div id="menuContainer" class="row g-3"></div>
+  </div>
+
+  <script>
+    window.TRUCK_ID = "{{truckId}}";
+  </script>
+
+  <script src="/js/jquery-2.2.0.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/src/truckMenu.js"></script>
+</body>
+</html>

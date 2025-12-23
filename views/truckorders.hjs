@@ -1,0 +1,71 @@
+<!-- <<%- include('partials/ownerNav'); %> -->
+<%- include('partials/ownerNav'); %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Truck Orders</title>
+
+  <link rel="stylesheet" href="/styles/bootstrap.min.css">
+  <link rel="stylesheet" href="/styles/style.css">
+
+  <script src="/js/jquery-2.2.0.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div id="msg" style="display:none; padding:10px; margin:10px 0; border-radius:6px;"></div>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/ownerDashboard">GIU FoodTruck</a>
+    </div>
+
+    <ul class="nav navbar-nav">
+      <li><a href="/ownerDashboard">Home</a></li>
+      <li><a href="/menuitems">Menu Items</a></li>
+      <li><a href="/addMenuItem">Add Item</a></li>
+      <li class="active"><a href="/truckOrders">Orders</a></li>
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="/dashboard">Switch View</a></li>
+      <li><a href="/logout">Logout</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+  <h2 class="text-center">Truck Orders</h2>
+
+  <p id="emptyMsg" class="text-center" style="display:none;">No orders found.</p>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Customer</th>
+          <th>Total</th>
+          <th>Status</th>
+          <th>Created At</th>
+          <th style="width: 240px;">Actions</th>
+        </tr>
+      </thead>
+      <tbody id="ordersBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<script src="/src/truckorders.js"></script>
+
+<!-- ✅ KEEP: scripts already included in head; if you prefer bottom loading, use these (commented to avoid double load) -->
+<!--
+<script src="/js/jquery-2.2.0.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+-->
+
+</body>
+</html>
